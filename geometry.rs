@@ -7,8 +7,11 @@ pub struct Geometry{
 }
 
 impl Geometry {
-    pub fn new(blocksize: u8) -> Geometry {
-        let boardsize = blocksize * blocksize;
+    pub fn new(boardsize: u8) -> Result<Geometry, ()> {
+        let blocksize = f64::sqrt(boardsize.into()) as u8;
+        if blocksize * blocksize != boardsize {
+            return Err(());
+        }
         let mut result = Geometry{
             boardsize: boardsize,
             blocksize: blocksize,
@@ -24,7 +27,7 @@ impl Geometry {
             result.col_members[col_id as usize].push(cell_id);
             result.block_members[block_id as usize].push(cell_id);
         }
-        return result
+        return Ok(result)
     }
 
     pub fn get_board_size(&self) -> u8 {
@@ -47,6 +50,9 @@ impl Geometry {
         let vertical_index = self.get_row_id(cell_id) / self.blocksize;
         let horizontal_index = self.get_col_id(cell_id) / self.blocksize;
         return vertical_index * self.blocksize + horizontal_index
+    }
+    pub fn get_cell_id_at(&self, row_id: u8, col_id: u8) -> u8 {
+        return row_id * self.boardsize + col_id
     }
 
     pub fn get_row_members(&self, row_id: u8) -> &[u8] {

@@ -1,4 +1,4 @@
-use super::geometry::*;
+use crate::geometry::*;
 
 
 #[derive(Clone)]
