@@ -7,11 +7,9 @@ pub struct Geometry{
 }
 
 impl Geometry {
-    pub fn new(boardsize: u8) -> Result<Geometry, ()> {
-        let blocksize = f64::sqrt(boardsize.into()) as u8;
-        if blocksize * blocksize != boardsize {
-            return Err(());
-        }
+    pub fn new(blocksize: u8) -> Geometry {
+        let boardsize: u8 = blocksize * blocksize;
+
         let mut result = Geometry{
             boardsize: boardsize,
             blocksize: blocksize,
@@ -27,13 +25,14 @@ impl Geometry {
             result.col_members[col_id as usize].push(cell_id);
             result.block_members[block_id as usize].push(cell_id);
         }
-        return Ok(result)
+        return result
     }
 
     pub fn from_cell_count(cell_count: usize) -> Result<Geometry, ()> {
         return match cell_count{
-            81 => Geometry::new(9),
-            256 => Geometry::new(16),
+            16 => Ok(Geometry::new(2)),
+            81 => Ok(Geometry::new(3)),
+            256 => Ok(Geometry::new(4)),
             _ => Err(()),
         }
     }
