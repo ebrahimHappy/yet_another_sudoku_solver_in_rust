@@ -1,5 +1,5 @@
 # Yet Another Sudoku Solver in Rust
-It is just a hubby project to learn rust.
+This is just a hobby project to learn rust. Don't expect it to be the fastest nor cleanest one, but it gets the job done. It solves a hard sudoku in a few milliseconds and it is just a few hundreds of lines.
 
 ## Build
 ```
@@ -17,5 +17,5 @@ rustc main.rs
 - Break smart board into multiple classes (board and strategy).
 - Use a idiomatic way to handle unsolvable cases.
 - Improve source layout.
-- parse 16x16 problems.
-- advanced argument parsing.
+- Parse 16x16 problems.
+- Advanced argument parsing.
