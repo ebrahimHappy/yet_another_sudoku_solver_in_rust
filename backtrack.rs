@@ -24,16 +24,13 @@ fn backtrack(board: &mut SmartBoard, max_number_of_answers: usize) -> Vec<Vec<Ve
 }
 
 
-pub fn solve(problem: Vec<Vec<Option<u8>>>, max_number_of_answers: usize) -> Vec<Vec<Vec<u8>>> {
-    let geometry = Geometry::new(problem.len() as u8).unwrap();
+pub fn solve(problem: Vec<u8>, max_number_of_answers: usize) -> Vec<Vec<Vec<u8>>> {
+    let geometry = Geometry::from_cell_count(problem.len()).unwrap();
     let mut board = SmartBoard::new(&geometry);
-    for (i, row) in problem.iter().enumerate(){
-        // TODO check len
-        for (j, value) in row.iter().enumerate(){
-            if let Some(number) = value {
-                if board.set(geometry.get_cell_id_at(i as u8, j as u8), number - 1) == false{
-                    return vec![];
-                }
+    for (cell_id, &value) in problem.iter().enumerate(){
+        if value > 0 {
+            if board.set(cell_id as u8, value - 1) == false{
+                return vec![];
             }
         }
     }

@@ -30,6 +30,14 @@ impl Geometry {
         return Ok(result)
     }
 
+    pub fn from_cell_count(cell_count: usize) -> Result<Geometry, ()> {
+        return match cell_count{
+            81 => Geometry::new(9),
+            256 => Geometry::new(16),
+            _ => Err(()),
+        }
+    }
+
     pub fn get_board_size(&self) -> u8 {
         self.boardsize
     }

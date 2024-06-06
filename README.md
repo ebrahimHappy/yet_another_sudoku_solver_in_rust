@@ -10,10 +10,12 @@ rustc main.rs
 
 ## Run
 ```
-./main
+./main problems/hard.txt
 ```
 
 ## Todo
-- Read problem from file.
 - Break smart board into multiple classes (board and strategy).
 - Use a idiomatic way to handle unsolvable cases.
+- Improve source layout.
+- parse 16x16 problems.
+- advanced argument parsing.
